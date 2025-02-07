@@ -1,18 +1,16 @@
+package com.mobileautomation.tests;
 
-package com.mobileautomation;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class BaseTest {
-    protected static AppiumDriver<MobileElement> driver;
-    
+    protected static IOSDriver driver;  // No generic parameter!
+
     @BeforeClass
     public void setUp() throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
@@ -21,10 +19,10 @@ public class BaseTest {
         caps.setCapability("platformVersion", "15.0");  // Use your iOS version
         caps.setCapability("automationName", "XCUITest");
         caps.setCapability("bundleId", "com.apple.calculator");
-        
-        driver = new IOSDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+
+        driver = new IOSDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);  // No <>
     }
-    
+
     @AfterClass
     public void tearDown() {
         if (driver != null) {
@@ -32,3 +30,5 @@ public class BaseTest {
         }
     }
 }
+
+
